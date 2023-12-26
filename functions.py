@@ -1,11 +1,6 @@
 import numpy as np
-import h5py
 import copy
-import matplotlib.pyplot as plt
 import h5py
-import scipy
-from PIL import Image
-from scipy import ndimage
     
 def load_dataset():
     ''' 
