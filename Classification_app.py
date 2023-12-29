@@ -1,18 +1,18 @@
+# app.py
 import numpy as np
 from functions import *
 from PIL import Image
 import streamlit as st
 
-# retrive data from the path
+# Retrieve data from the path
 train_X, train_Y, test_X, test_Y, classes = getting_data()
 
-#train the model
+# Train the model
 logistic_regression_model = model(train_X, train_Y, test_X, test_Y, num_iterations=2000, learning_rate=0.005, print_cost=True)
 
-
-st.title(" Image classification.")
-st.write( "Upload an image " )
-up_file = st.file.uploader("")
+st.title("Image classification.")
+st.write("Upload an image.")
+up_file = st.file_uploader("")
 
 if up_file is not None:
     pict = Image.open(up_file)
@@ -21,6 +21,6 @@ if up_file is not None:
     image = image.reshape((1, num_px * num_px * 3)).T
     image = image / 255.
     my_predicted_image = predict(logistic_regression_model["w"], logistic_regression_model["b"], image)
-    st.write("Algorithm predicts a \"" + classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
+    st.write("Algorithm predicts a \"" + classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") + "\" picture.")
     st.write("Test Accuracy is " + str(logistic_regression_model['test_accuracy']) + "%")
-    st.image(image, caption = 'Uploaded Image.', use_column_width=True)
+    st.image(image, caption='Uploaded Image.', use_column_width=True)
