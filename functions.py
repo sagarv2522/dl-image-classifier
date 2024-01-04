@@ -40,19 +40,27 @@ def load_dataset():
 
 
 def getting_data():
-    
-    # Loading the data (cat/non-cat)
-    train_X_org, train_Y, test_X_org, test_Y, classes = load_dataset()
-    
-    #reshaping the image related to dimension
-    train_x_flatten= train_X_org.reshape(train_X_org.shape[0],-1).T
-    test_x_flatten=test_X_org.reshape(test_X_org.shape[0], -1).T
-    
-    # standardize the image with 255
-    train_X = train_x_flatten / 255
-    test_X = test_x_flatten / 255
-    
-    return train_X, train_Y, test_X, test_Y, classes
+    try:
+        # Loading the data (cat/non-cat)
+        train_X_org, train_Y, test_X_org, test_Y, classes = load_dataset()
+
+        if train_X_org is None or train_Y is None or test_X_org is None or test_Y is None or classes is None:
+            print("Error loading dataset. Check if the HDF5 files exist and the paths are correct.")
+            return None
+
+        # Reshaping the image related to dimension
+        train_x_flatten = train_X_org.reshape(train_X_org.shape[0], -1).T
+        test_x_flatten = test_X_org.reshape(test_X_org.shape[0], -1).T
+
+        # Standardize the image with 255
+        train_X = train_x_flatten / 255
+        test_X = test_x_flatten / 255
+
+        return train_X, train_Y, test_X, test_Y, classes
+
+    except Exception as e:
+        print(f"Error in getting_data: {e}")
+        return None
 
 
 def sigmoid(z):
