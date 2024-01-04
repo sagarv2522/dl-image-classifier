@@ -7,31 +7,37 @@ def load_dataset():
     This Function is used to read the h5py file to normal np array formate and decode the file formate
     
     Returns:
-    train_set_x_orig -- a pandas DataFrame of training features
+    train_set_x_orig -- a pandas DataFrame of training features 
     train_set_y_orig -- a pandas DataFrame of training labels
     test_set_x_orig -- a pandas DataFrame of test features
     test_set_y_orig -- a pandas DataFrame of test labels
     classes -- a numpy array of classes
     '''
-    
-    # Load the train dataset as h5 file
-    train_dataset = pd.read_hdf('Datasets/train_catvnoncat.h5')  # Change the file path accordingly
-    train_set_x_orig = train_dataset["train_set_x"]
-    train_set_y_orig = train_dataset["train_set_y"]
 
-    # Load the test dataset as h5 file
-    test_dataset = pd.read_hdf('Datasets/test_catvnoncat.h5')  # Change the file path accordingly
-    test_set_x_orig = test_dataset["test_set_x"]
-    test_set_y_orig = test_dataset["test_set_y"]
+    try:
+        # Load the train dataset as h5 file
+        train_dataset = pd.read_hdf('Datasets/train_catvnoncat.h5')  # Change the file path accordingly
+        train_set_x_orig = train_dataset["train_set_x"]
+        train_set_y_orig = train_dataset["train_set_y"]
 
-    # Extract the list of classes
-    classes = np.array(test_dataset["list_classes"])
-    
-    # Reshape the dimension of y set
-    train_set_y_orig = train_set_y_orig.values.reshape((1, train_set_y_orig.shape[0]))
-    test_set_y_orig = test_set_y_orig.values.reshape((1, test_set_y_orig.shape[0]))
-    
-    return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
+        # Load the test dataset as h5 file
+        test_dataset = pd.read_hdf('Datasets/test_catvnoncat.h5')  # Change the file path accordingly
+        test_set_x_orig = test_dataset["test_set_x"]
+        test_set_y_orig = test_dataset["test_set_y"]
+
+        # Extract the list of classes
+        classes = np.array(test_dataset["list_classes"])
+
+        # Reshape the dimension of y set
+        train_set_y_orig = train_set_y_orig.values.reshape((1, train_set_y_orig.shape[0]))
+        test_set_y_orig = test_set_y_orig.values.reshape((1, test_set_y_orig.shape[0]))
+
+        return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
+
+    except Exception as e:
+        print(f"Error loading dataset: {e}")
+        return None
+
 
 def getting_data():
     
