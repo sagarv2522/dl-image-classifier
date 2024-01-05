@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from functions import *
 
 # Retrieve data from the path
-train_X, train_Y, test_X, test_Y, classes = getting_data()
+train_X, train_Y, test_X, test_Y, classes = load_and_process_dataset()
 
 # Train the model
 logistic_regression_model = model(train_X, train_Y, test_X, test_Y, num_iterations=2000, learning_rate=0.005, print_cost=True)
