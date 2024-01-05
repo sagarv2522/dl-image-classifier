@@ -2,10 +2,6 @@ import numpy as np
 import pandas as pd
 import copy
 
-import numpy as np
-import pandas as pd
-import h5py
-
 def load_and_process_dataset():
     try:
         # Load the train dataset as h5 file
