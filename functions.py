@@ -3,17 +3,6 @@ import pandas as pd
 import copy
 
 def load_dataset():
-    ''' 
-    This Function is used to read the h5py file to normal np array formate and decode the file formate
-    
-    Returns:
-    train_set_x_orig -- a pandas DataFrame of training features 
-    train_set_y_orig -- a pandas DataFrame of training labels
-    test_set_x_orig -- a pandas DataFrame of test features
-    test_set_y_orig -- a pandas DataFrame of test labels
-    classes -- a numpy array of classes
-    '''
-
     try:
         # Load the train dataset as h5 file
         train_dataset = pd.read_hdf('Datasets/train_catvnoncat.h5')  # Change the file path accordingly
@@ -32,11 +21,19 @@ def load_dataset():
         train_set_y_orig = train_set_y_orig.values.reshape((1, train_set_y_orig.shape[0]))
         test_set_y_orig = test_set_y_orig.values.reshape((1, test_set_y_orig.shape[0]))
 
+        print("Dataset loaded successfully.")
+        print(f"train_set_x_orig shape: {train_set_x_orig.shape}")
+        print(f"train_set_y_orig shape: {train_set_y_orig.shape}")
+        print(f"test_set_x_orig shape: {test_set_x_orig.shape}")
+        print(f"test_set_y_orig shape: {test_set_y_orig.shape}")
+        print(f"Classes: {classes}")
+
         return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
     except Exception as e:
         print(f"Error loading dataset: {e}")
         return None
+
 
 
 def getting_data():
