@@ -3,7 +3,6 @@ import pandas as pd
 import copy
 
 def load_dataset():
-    def load_dataset():
     try:
         # Load the train dataset as h5 file
         train_dataset = pd.read_hdf('Datasets/train_catvnoncat.h5')  # Change the file path accordingly
@@ -35,10 +34,6 @@ def load_dataset():
         print(f"Error loading dataset: {e}")
         raise e  # Add this line to raise the exception again for better debugging
 
-
-    except Exception as e:
-        print(f"Error loading dataset: {e}")
-        return None
 
 
 
