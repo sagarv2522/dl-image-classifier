@@ -56,11 +56,19 @@ def getting_data():
         train_X = train_x_flatten / 255
         test_X = test_x_flatten / 255
 
+        print("Dataset loaded successfully.")
+        print(f"train_X shape: {train_X.shape}")
+        print(f"train_Y shape: {train_Y.shape}")
+        print(f"test_X shape: {test_X.shape}")
+        print(f"test_Y shape: {test_Y.shape}")
+        print(f"Classes: {classes}")
+
         return train_X, train_Y, test_X, test_Y, classes
 
     except Exception as e:
         print(f"Error in getting_data: {e}")
         return None
+
 
 
 
