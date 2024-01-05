@@ -2,7 +2,11 @@ import numpy as np
 import pandas as pd
 import copy
 
-def load_dataset():
+import numpy as np
+import pandas as pd
+import h5py
+
+def load_and_process_dataset():
     try:
         # Load the train dataset as h5 file
         train_dataset = pd.read_hdf('Datasets/train_catvnoncat.h5')  # Change the file path accordingly
@@ -21,54 +25,27 @@ def load_dataset():
         train_set_y_orig = train_set_y_orig.values.reshape((1, train_set_y_orig.shape[0]))
         test_set_y_orig = test_set_y_orig.values.reshape((1, test_set_y_orig.shape[0]))
 
-        print("Dataset loaded successfully.")
-        print(f"train_set_x_orig shape: {train_set_x_orig.shape}")
-        print(f"train_set_y_orig shape: {train_set_y_orig.shape}")
-        print(f"test_set_x_orig shape: {test_set_x_orig.shape}")
-        print(f"test_set_y_orig shape: {test_set_y_orig.shape}")
-        print(f"Classes: {classes}")
-
-        return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
-
-    except Exception as e:
-        print(f"Error loading dataset: {e}")
-        raise e  # Add this line to raise the exception again for better debugging
-
-
-
-
-def getting_data():
-    try:
-        # Loading the data (cat/non-cat)
-        train_X_org, train_Y, test_X_org, test_Y, classes = load_dataset()
-
-        if train_X_org is None or train_Y is None or test_X_org is None or test_Y is None or classes is None:
-            print("Error loading dataset. Check if the HDF5 files exist and the paths are correct.")
-            return None
-
         # Reshaping the image related to dimension
-        train_x_flatten = train_X_org.reshape(train_X_org.shape[0], -1).T
-        test_x_flatten = test_X_org.reshape(test_X_org.shape[0], -1).T
+        train_x_flatten = train_set_x_orig.reshape(train_set_x_orig.shape[0], -1).T
+        test_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0], -1).T
 
         # Standardize the image with 255
         train_X = train_x_flatten / 255
         test_X = test_x_flatten / 255
 
-        print("Dataset loaded successfully.")
+        print("Data loaded and processed successfully.")
         print(f"train_X shape: {train_X.shape}")
-        print(f"train_Y shape: {train_Y.shape}")
+        print(f"train_Y shape: {train_set_y_orig.shape}")
         print(f"test_X shape: {test_X.shape}")
-        print(f"test_Y shape: {test_Y.shape}")
+        print(f"test_Y shape: {test_set_y_orig.shape}")
         print(f"Classes: {classes}")
 
-        return train_X, train_Y, test_X, test_Y, classes
+        return train_X, train_set_y_orig, test_X, test_set_y_orig, classes
 
     except Exception as e:
-        print(f"Error in getting_data: {e}")
+        print(f"Error loading and processing dataset: {e}")
         return None
-
-
-
+        
 
 def sigmoid(z):
     """
