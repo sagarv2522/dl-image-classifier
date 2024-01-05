@@ -1,8 +1,11 @@
-# app.py
+# Classification_app.py
 import numpy as np
-from functions import *
+import pandas as pd
+import copy
 from PIL import Image
 import streamlit as st
+import matplotlib.pyplot as plt
+from functions import *
 
 # Retrieve data from the path
 train_X, train_Y, test_X, test_Y, classes = getting_data()
