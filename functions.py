@@ -63,6 +63,7 @@ def getting_data():
         return None
 
 
+
 def sigmoid(z):
     """
     Compute the sigmoid of z
